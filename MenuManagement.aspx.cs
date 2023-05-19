@@ -1,8 +1,12 @@
 ﻿using Google.Cloud.Firestore;
+using Google.Cloud.Storage.V1;
 using HomeCookingWebPanel.Model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -11,6 +15,7 @@ namespace HomeCookingWebPanel
     public partial class MenuManagement : System.Web.UI.Page
     {
         FirestoreDb database;
+        readonly Islem islem = new Islem();
         protected void Page_Load(object sender, EventArgs e)
         {
             string path = AppDomain.CurrentDomain.BaseDirectory + @"firestore.json";
@@ -33,7 +38,10 @@ namespace HomeCookingWebPanel
                 if (docsnap.Exists)
                 {
                     for (int i=0; i < foodCategory.foodCategories.Count; i++)
+                    {
                         Ddl_FilterCategory.Items.Add(foodCategory.foodCategories[i]);
+                        Cbl_Category.Items.Add(foodCategory.foodCategories[i]);
+                    }    
                 }
             }
         }
@@ -190,6 +198,127 @@ namespace HomeCookingWebPanel
             idrow.Visible = false;
             row.Cells.Remove(processRow);
             row.Cells.Add(processRow);
+        }
+
+        protected void BtnNew_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "", "newMenu();", true);
+        }
+
+        protected void BtnAdd_Click(object sender, EventArgs e)
+        {
+            if (Txt_NewMenuName.Text == "" || Txt_NewMenuContent.Text == "" || Txt_NewMenuPrice.Text==""|| Txt_NewMenuRaiting.Text=="" || Txt_NewPerparationTime.Text==""||fileUpload.HasFile == false)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Lütfen tüm alanları doldurunuz!', icon: 'error', button: 'Tamam'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
+            }
+            else
+            {
+                if (fileUpload.HasFile)
+                {
+                    var fileName = System.IO.Path.GetExtension(fileUpload.FileName);
+                    if (IsImageFile(fileName))
+                    {
+                        string ImageURL;
+                        fileName = fileUpload.FileName;
+                        var contentType = fileUpload.PostedFile.ContentType;
+                        var fileStream = fileUpload.PostedFile.InputStream;
+                        ImageURL = AddMenuPic(fileName, contentType, fileStream);
+                        HaberEkle(ImageURL);
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Yeni menu eklendi.', icon: 'success', button: 'Tamam'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Yüklediğiniz dosya bir görsele benzemiyor. Lütfen kontrol ediniz!', icon: 'error', button: 'Tamam'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
+                    }
+                }
+
+            }
+        }
+        private string AddMenuPic(string fileName, string contentType, Stream fileStream)
+        {
+            // StorageClient oluşturuluyor
+            var storage = StorageClient.Create();
+
+            // Dosyanın yükleneceği bucketName ve objectName oluşturuluyor
+            var bucketName = "project-management-22705.appspot.com";
+            var objectName = "Menu Picture/" + fileName;
+
+            // Yeni bir Object oluşturuluyor
+            var newObject = new Google.Apis.Storage.v1.Data.Object()
+            {
+                Bucket = bucketName,
+                Name = objectName,
+                ContentType = contentType,
+                Metadata = new Dictionary<string, string>()
+            {
+            // Firebase Storage download URL'sini oluşturmak için gerekli olan token'ı ekleyin
+            { "firebaseStorageDownloadTokens", Guid.NewGuid().ToString() }
+            }
+            };
+
+            // Dosya yükleniyor
+            storage.UploadObject(bucketName, objectName, contentType, fileStream);
+
+            // Download URL'si oluşturuluyor
+            string url = $"https://firebasestorage.googleapis.com/v0/b/{bucketName}/o/{Uri.EscapeDataString(objectName)}?alt=media&token={newObject.Metadata["firebaseStorageDownloadTokens"]}";
+            return url;
+        }
+        private bool IsImageFile(string fileExtension)
+        {
+            string[] allowedExtensions = { ".jpg", ".jpeg", ".png", ".gif" };
+            return allowedExtensions.Contains(fileExtension.ToLower());
+        }
+        void HaberEkle(string ImageURL)
+        {
+            
+            string multilineText = Txt_NewMenuContent.Text;
+            string[] lines = multilineText.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            ArrayList MenuContent = new ArrayList();
+            foreach (string line in lines)
+            {MenuContent.Add(line);}
+            ArrayList selectedItems = new ArrayList();
+
+            foreach (ListItem item in Cbl_Category.Items)
+            {
+                if (item.Selected)
+                {
+                    selectedItems.Add(item.Value);
+                }
+            }
+            DocumentReference DOC = database.Collection("recipes").Document(islem.EpochNumber().ToString());
+            Dictionary<string, object> data = new Dictionary<string, object>()
+            {
+                {"creationDate", islem.TarihCevir(DateTime.UtcNow)},
+                {"hazirlamaSuresi",Txt_NewPerparationTime.Text},
+                {"urunAdi", Txt_NewMenuName.Text},
+                {"urunGorseli",ImageURL },
+                {"urunPrice",Txt_NewMenuPrice.Text},
+                {"urunPuani",Txt_NewMenuRaiting.Text }
+            };
+            data.Add("malzemeler", MenuContent);
+            data.Add("urunTipi", selectedItems);
+            data.Add("urunAdiArray", TextSplit(Txt_NewMenuName.Text));
+            DOC.SetAsync(data);
+        }
+        ArrayList TextSplit(string str)
+        {
+            str = str.ToLower();
+            ArrayList kombinasyonlar = new ArrayList();
+            string[] kelimeler = str.Split(' ');
+            foreach (string kelime in kelimeler)
+            {
+                for (int i = 0; i < kelime.Length; i++)
+                {
+                    if (kelime[i] == kelime[0])
+                    {
+                        for (int j = i + 1; j <= kelime.Length; j++)
+                        {
+                            kombinasyonlar.Add(kelime.Substring(i, j - i));
+                        }
+                    }
+                }
+            }
+            return kombinasyonlar;
         }
     }
 }

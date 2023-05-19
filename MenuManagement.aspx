@@ -10,7 +10,7 @@
             </ol>
                         <div class="right">
                 <div class="btn-group" role="group" aria-label="...">
-                    <asp:LinkButton BorderColor="#353435" BackColor="#cf2627" ForeColor="White" runat="server" ID="BtnNew" CssClass="btn btn-success"><i class="fa fa-plus-circle"></i> Add New Menu</asp:LinkButton>
+                    <asp:LinkButton BorderColor="#353435" OnClick="BtnNew_Click" BackColor="#cf2627" ForeColor="White" runat="server" ID="BtnNew" CssClass="btn btn-success"><i class="fa fa-plus-circle"></i> Add New Menu</asp:LinkButton>
                 </div>
             </div>
         </div>
@@ -19,8 +19,8 @@
                      <div class="panel-body margin-5 text-right">
                      <label class="control-label form-label">Category:</label>
                      <asp:DropDownList CssClass="btn btn-secondary dropdown-toggle" Font-Size="Smaller" ID="Ddl_FilterCategory" runat="server"></asp:DropDownList>
-                     <asp:LinkButton Font-Size="Smaller" OnClick="Btn_Reset_Click" Height="30px" BackColor="#cf2627" BorderColor="#353435" BorderWidth="1" runat="server" ID="Btn_Reset" CssClass="btn btn-success"><i class="fa fa-refresh"></i>Sıfırla</asp:LinkButton>
-                     <asp:LinkButton OnClick="BtnFilter_Click" Font-Size="Smaller" Height="30px" BackColor="#cf2627" BorderColor="#353435" BorderWidth="1" runat="server" ID="BtnFilter" CssClass="btn btn-success"><i class="fa fa-filter"></i>Filtrele</asp:LinkButton><br />
+                     <asp:LinkButton Font-Size="Smaller" OnClick="Btn_Reset_Click" Height="30px" BackColor="#cf2627" BorderColor="#353435" BorderWidth="1" runat="server" ID="Btn_Reset" CssClass="btn btn-success"><i class="fa fa-refresh"></i>Reset</asp:LinkButton>
+                     <asp:LinkButton OnClick="BtnFilter_Click" Font-Size="Smaller" Height="30px" BackColor="#cf2627" BorderColor="#353435" BorderWidth="1" runat="server" ID="BtnFilter" CssClass="btn btn-success"><i class="fa fa-filter"></i>Filter</asp:LinkButton><br />
                 </div>
             <div class="panel-body margin-5">
                 <asp:Label ID="Lbl_Comment" runat="server" Text=""></asp:Label>
@@ -29,7 +29,7 @@
                     <RowStyle Font-Size="Small" Height="30px"/>
                      <alternatingrowstyle  Height="30px"/>
                     <Columns>
-               <asp:TemplateField HeaderText="İşlemler">
+               <asp:TemplateField HeaderText="Transactions">
             <ItemTemplate>
                 <asp:Button CommandArgument="<%# Container.DataItemIndex %>" Font-Size="Smaller" Height="30px" BackColor="#cf2627" BorderWidth="1px" BorderColor="#353435" ControlStyle-CssClass="btn btn-info" Text="Select" runat="server" CommandName="Select"/>
             </ItemTemplate>
@@ -74,15 +74,27 @@
                                                 </div>
                                           </div>
                                             <div class="form-group">
-                                                <label class="col-sm-3 control-label form-label">Haber Görseli:</label>
+                                                <label class="col-sm-3 control-label form-label">Product Image:</label>
                                                 <div class="col-sm-9">
                                                   <asp:FileUpload ID="fileUpload" runat="server" />
                                                 </div>
-                                            </div>  
+                                            </div>
+                                             <div class="form-group">
+                                                 <label class="col-sm-3 control-label form-label">Menu Content:</label>
+                                                <div class="col-sm-9" style="position:relative">
+                                                    <asp:TextBox ID="Txt_NewMenuContent" AutoCompleteType="Disabled" ReadOnly="false" class="form-control" Rows="5" TextMode="MultiLine" runat="server" ></asp:TextBox>
+                                                </div>
+                                          </div>
+                                               <div class="form-group">
+                                                 <label class="col-sm-3 control-label form-label">Category:</label>
+                                                <div class="col-sm-9" style="position:relative">
+                                                    <asp:CheckBoxList ID="Cbl_Category" CssClass="checkbox checkbox-inline" runat="server" RepeatColumns="3" RepeatDirection="Horizontal"></asp:CheckBoxList>
+                                                </div>
+                                          </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                            <asp:Button ID="BtnAdd" BackColor="#9642de" CssClass="btn btn-default" runat="server" Text="Add"/>
+                                            <asp:Button ID="BtnAdd" OnClick="BtnAdd_Click" BackColor="#9642de" CssClass="btn btn-default" runat="server" Text="Add"/>
                                         </div>
                                     </form>
                                 </div>
@@ -162,6 +174,11 @@
             </div>
         </div>
     </div>
+            <style>
+  .checkbox label {
+    padding-right: 25px;
+    padding-left: 3px; }
+            </style>
          <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script type="text/javascript">
             function showEdit() {

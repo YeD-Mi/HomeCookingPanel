@@ -141,6 +141,24 @@ namespace HomeCookingWebPanel
         protected global::System.Web.UI.WebControls.FileUpload fileUpload;
 
         /// <summary>
+        /// Txt_NewMenuContent denetimi.
+        /// </summary>
+        /// <remarks>
+        /// Otomatik üretilmiş alan.
+        /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Txt_NewMenuContent;
+
+        /// <summary>
+        /// Cbl_Category denetimi.
+        /// </summary>
+        /// <remarks>
+        /// Otomatik üretilmiş alan.
+        /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList Cbl_Category;
+
+        /// <summary>
         /// BtnAdd denetimi.
         /// </summary>
         /// <remarks>

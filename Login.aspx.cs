@@ -22,13 +22,12 @@ namespace HomeCookingWebPanel
             FirestoreDb database = FirestoreDb.Create("project-management-22705");
             Query Qref = database.Collection("recipes");
             QuerySnapshot snap = await Qref.GetSnapshotAsync();
-
+            Response.Redirect("OrderPage.aspx");
             foreach (DocumentSnapshot docsnap in snap)
             {
                 if (docsnap.Exists)
                 {
              
-                        Response.Redirect("OrderPage.aspx");
                     
                 }
             }

@@ -26,7 +26,7 @@
                     <RowStyle Font-Size="Small" Height="30px"/>
                      <alternatingrowstyle  Height="30px"/>
                     <Columns>
-               <asp:TemplateField HeaderText="İşlemler">
+               <asp:TemplateField HeaderText="Transactions">
             <ItemTemplate>
                 <asp:Button CommandArgument="<%# Container.DataItemIndex %>" Font-Size="Smaller" Height="30px" BackColor="#cf2627" BorderWidth="1px" BorderColor="#353435" ControlStyle-CssClass="btn btn-info" Text="Select" runat="server" CommandName="Select"/>
             </ItemTemplate>
