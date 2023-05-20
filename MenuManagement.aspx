@@ -70,7 +70,7 @@
                                             <div class="form-group">
                                                  <label class="col-sm-3 control-label form-label">Menu Raiting (Max 5):</label>
                                                 <div class="col-sm-9" style="position:relative">
-                                                    <asp:TextBox ID="Txt_NewMenuRaiting" AutoCompleteType="Disabled" ReadOnly="false" class="form-control" TextMode="Number" runat="server" ></asp:TextBox>
+                                                    <asp:TextBox ID="Txt_NewMenuRaiting" AutoCompleteType="Disabled" ReadOnly="false" class="form-control" runat="server" ></asp:TextBox>
                                                 </div>
                                           </div>
                                             <div class="form-group">
@@ -106,53 +106,65 @@
                         <asp:AsyncPostBackTrigger ControlID="BtnNew" EventName="click" />
                     </Triggers>
                 </asp:UpdatePanel>
-                   <asp:UpdatePanel ID="UP_EditOrder" runat="server" UpdateMode="Conditional">
+                   <asp:UpdatePanel ID="UP_EditMenu" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
-                        <asp:Panel ID="editOrder" runat="server" ClientIDMode="Static" class="modal fade" TabIndex="-1" role="dialog" aria-hidden="true">
+                        <asp:Panel ID="editMenu" runat="server" ClientIDMode="Static" class="modal fade" TabIndex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" style="background-color:#FF7622" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                        <h3 style="text-align:center; color:#cf2627">Order <span style="color:#353435">Edit</span></h3>
+                                        <h3 style="text-align:center; color:#cf2627">Menu <span style="color:#353435">Edit</span></h3>
                                         </div>
                                      <form method="post" action="OrderPage.aspx">
                                         <div class="modal-body form-horizontal">
+                                                <div class="form-group">
+                                                 <label class="col-sm-3 control-label form-label">Menu Name:</label>
+                                                <div class="col-sm-9" style="position:relative">
+                                                    <asp:TextBox ID="Txt_EditMenuName" AutoCompleteType="Disabled" ReadOnly="false" class="form-control" runat="server" ></asp:TextBox>
+                                                </div>
+                                          </div>
+                                               <div class="form-group">
+                                                 <label class="col-sm-3 control-label form-label">Preparation Time:</label>
+                                                <div class="col-sm-9" style="position:relative">
+                                                    <asp:TextBox ID="Txt_EditPreparation" AutoCompleteType="Disabled" ReadOnly="false" class="form-control" TextMode="Number" runat="server" ></asp:TextBox>
+                                                </div>
+                                          </div>
                                               <div class="form-group">
-                                                 <label class="col-sm-3 control-label form-label">Orderer:</label>
+                                                 <label class="col-sm-3 control-label form-label">Menu Price:</label>
                                                 <div class="col-sm-9" style="position:relative">
-                                                    <asp:TextBox ID="Txt_EditOrderer" AutoCompleteType="Disabled" ReadOnly="true" class="form-control" runat="server" ></asp:TextBox>
+                                                    <asp:TextBox ID="Txt_EditPrice" AutoCompleteType="Disabled" ReadOnly="false" class="form-control" TextMode="Number" runat="server" ></asp:TextBox>
                                                 </div>
-                                                </div>
-                                                                                          <div class="form-group">
-                                                 <label class="col-sm-3 control-label form-label">Address:</label>
+                                          </div>
+                                            <div class="form-group">
+                                                 <label class="col-sm-3 control-label form-label">Menu Raiting (Max 5):</label>
                                                 <div class="col-sm-9" style="position:relative">
-                                                    <asp:TextBox ID="Txt_EditAddress" AutoCompleteType="Disabled" ReadOnly="true" class="form-control" TextMode="MultiLine" Rows="3" runat="server" ></asp:TextBox>
+                                                    <asp:TextBox ID="Txt_EditRaiting" AutoCompleteType="Disabled" ReadOnly="false" class="form-control" runat="server" ></asp:TextBox>
                                                 </div>
+                                          </div>
+                                             <div class="form-group">
+                                                <label class="col-sm-3 control-label form-label">Product Image:</label>
+                                                <div class="col-sm-9">
+                                                    <asp:Image ID="Image1" runat="server" Width="380"/>
                                                 </div>
-                                                                                          <div class="form-group">
-                                                 <label class="col-sm-3 control-label form-label">Order Date:</label>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label form-label">Change Image:</label>
+                                                <div class="col-sm-9">
+                                                  <asp:FileUpload ID="fileUpload1" runat="server" />
+                                                </div>
+                                            </div>
+                                             <div class="form-group">
+                                                 <label class="col-sm-3 control-label form-label">Menu Content:</label>
                                                 <div class="col-sm-9" style="position:relative">
-                                                    <asp:TextBox ID="Txt_EditOrderDate" AutoCompleteType="Disabled" ReadOnly="true" class="form-control" runat="server" ></asp:TextBox>
+                                                    <asp:TextBox ID="Txt_EditContent" AutoCompleteType="Disabled" ReadOnly="false" class="form-control" Rows="5" TextMode="MultiLine" runat="server" ></asp:TextBox>
                                                 </div>
-                                                </div>
-                                                                                          <div class="form-group">
-                                                 <label class="col-sm-3 control-label form-label">Order Content:</label>
+                                          </div>
+                                               <div class="form-group">
+                                                 <label class="col-sm-3 control-label form-label">Category:</label>
                                                 <div class="col-sm-9" style="position:relative">
-                                                    <asp:TextBox ID="Txt_EditOrderContent" AutoCompleteType="Disabled" TextMode="MultiLine" Rows="3" ReadOnly="true" class="form-control" runat="server" ></asp:TextBox>
+                                                    <asp:CheckBoxList ID="Cbl_EditCategory" CssClass="checkbox checkbox-inline" runat="server" RepeatColumns="3" RepeatDirection="Horizontal"></asp:CheckBoxList>
                                                 </div>
-                                                </div>
-                                                                                          <div class="form-group">
-                                                 <label class="col-sm-3 control-label form-label">Order Price:</label>
-                                                <div class="col-sm-9" style="position:relative">
-                                                    <asp:TextBox ID="Txt_EditOrderPrice" AutoCompleteType="Disabled" ReadOnly="true" class="form-control" runat="server" ></asp:TextBox>
-                                                </div>
-                                                </div>
-                                                                                                                                      <div class="form-group">
-                                                 <label class="col-sm-3 control-label form-label">Order Statu:</label>
-                                                <div class="col-sm-9" style="position:relative">
-                                                    <asp:DropDownList ID="Dd_EditOrderStatu" CssClass="form-control" runat="server"></asp:DropDownList>
-                                                </div>
-                                                </div>
+                                          </div>
                                             </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
@@ -182,7 +194,7 @@
          <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script type="text/javascript">
             function showEdit() {
-                $("#editOrder").modal("show");
+                $("#editMenu").modal("show");
             };
             function newMenu() {
                 $("#newMenu").modal("show");

@@ -168,76 +168,94 @@ namespace HomeCookingWebPanel
         protected global::System.Web.UI.WebControls.Button BtnAdd;
 
         /// <summary>
-        /// UP_EditOrder denetimi.
+        /// UP_EditMenu denetimi.
         /// </summary>
         /// <remarks>
         /// Otomatik üretilmiş alan.
         /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UP_EditOrder;
+        protected global::System.Web.UI.UpdatePanel UP_EditMenu;
 
         /// <summary>
-        /// editOrder denetimi.
+        /// editMenu denetimi.
         /// </summary>
         /// <remarks>
         /// Otomatik üretilmiş alan.
         /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel editOrder;
+        protected global::System.Web.UI.WebControls.Panel editMenu;
 
         /// <summary>
-        /// Txt_EditOrderer denetimi.
+        /// Txt_EditMenuName denetimi.
         /// </summary>
         /// <remarks>
         /// Otomatik üretilmiş alan.
         /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Txt_EditOrderer;
+        protected global::System.Web.UI.WebControls.TextBox Txt_EditMenuName;
 
         /// <summary>
-        /// Txt_EditAddress denetimi.
+        /// Txt_EditPreparation denetimi.
         /// </summary>
         /// <remarks>
         /// Otomatik üretilmiş alan.
         /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Txt_EditAddress;
+        protected global::System.Web.UI.WebControls.TextBox Txt_EditPreparation;
 
         /// <summary>
-        /// Txt_EditOrderDate denetimi.
+        /// Txt_EditPrice denetimi.
         /// </summary>
         /// <remarks>
         /// Otomatik üretilmiş alan.
         /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Txt_EditOrderDate;
+        protected global::System.Web.UI.WebControls.TextBox Txt_EditPrice;
 
         /// <summary>
-        /// Txt_EditOrderContent denetimi.
+        /// Txt_EditRaiting denetimi.
         /// </summary>
         /// <remarks>
         /// Otomatik üretilmiş alan.
         /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Txt_EditOrderContent;
+        protected global::System.Web.UI.WebControls.TextBox Txt_EditRaiting;
 
         /// <summary>
-        /// Txt_EditOrderPrice denetimi.
+        /// Image1 denetimi.
         /// </summary>
         /// <remarks>
         /// Otomatik üretilmiş alan.
         /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Txt_EditOrderPrice;
+        protected global::System.Web.UI.WebControls.Image Image1;
 
         /// <summary>
-        /// Dd_EditOrderStatu denetimi.
+        /// fileUpload1 denetimi.
         /// </summary>
         /// <remarks>
         /// Otomatik üretilmiş alan.
         /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Dd_EditOrderStatu;
+        protected global::System.Web.UI.WebControls.FileUpload fileUpload1;
+
+        /// <summary>
+        /// Txt_EditContent denetimi.
+        /// </summary>
+        /// <remarks>
+        /// Otomatik üretilmiş alan.
+        /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Txt_EditContent;
+
+        /// <summary>
+        /// Cbl_EditCategory denetimi.
+        /// </summary>
+        /// <remarks>
+        /// Otomatik üretilmiş alan.
+        /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList Cbl_EditCategory;
 
         /// <summary>
         /// Btn_Edit denetimi.

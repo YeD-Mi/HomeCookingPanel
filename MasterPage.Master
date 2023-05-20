@@ -31,11 +31,11 @@
             <ul class="top-right">
                 <li" class="dropdown link">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle profilebox">
-                        <b>Hoşgeldin:
+                        <b>Welcome:
                             <asp:Label ID="kullanici" runat="server" Text=""></asp:Label>
                         </b><span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-list dropdown-menu-right">
-                        <li><a href="login.aspx"><i class="fa falist fa-power-off"></i>Çıkış Yap</a></li>
+                        <li><a href="login.aspx"><i class="fa falist fa-power-off"></i>Exit</a></li>
                     </ul>
                 </li>
             </ul>
@@ -43,13 +43,13 @@
        
         <div class="sidebar clearfix">
             <ul class="sidebar-panel nav">
-                <li class="sidetitle">İŞLEM MENÜSÜ</li>
-                <li><a href="OrderPage.aspx"><span style="color:#b65656" class="icon color5"><i class="fa fa-shopping-cart"></i></span>Siparişler</a></li>
-                <li><a href="MenuManagement.aspx"><span style="color:#b65656" class="icon color5"><i class="fa fa-cutlery"></i></span>Yemekler</a></li>
+                <li class="sidetitle">ACTION MENU</li>
+                <li><a href="OrderPage.aspx"><span style="color:#b65656" class="icon color5"><i class="fa fa-shopping-cart"></i></span>Order Page</a></li>
+                <li><a href="MenuManagement.aspx"><span style="color:#b65656" class="icon color5"><i class="fa fa-cutlery"></i></span>Menu Page</a></li>
             </ul>
             <ul class="sidebar-panel nav">
-                <li class="sidetitle">AYARLAR</li>
-                <li><a href="UserManagement.aspx"><span style="color:#b65656" class="icon color5"><i class="fa fa-user"></i></span>Kullanıcı Yönetimi</a></li>
+                <li class="sidetitle">SETTINGS</li>
+                <li><a href="UserManagement.aspx"><span style="color:#b65656" class="icon color5"><i class="fa fa-user"></i></span>User Management</a></li>
             </ul>
         </div>
     

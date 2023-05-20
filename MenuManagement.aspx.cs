@@ -41,6 +41,7 @@ namespace HomeCookingWebPanel
                     {
                         Ddl_FilterCategory.Items.Add(foodCategory.foodCategories[i]);
                         Cbl_Category.Items.Add(foodCategory.foodCategories[i]);
+                        Cbl_EditCategory.Items.Add(foodCategory.foodCategories[i]);
                     }    
                 }
             }
@@ -155,7 +156,11 @@ namespace HomeCookingWebPanel
             DocumentReference docref = database.Collection("recipes").Document(Data.Instance.MenuProcess);
             Dictionary<string, object> data = new Dictionary<string, object>()
             {
-                {"orderStatus",Dd_EditOrderStatu.SelectedValue },
+                {"hazirlamaSuresi",Txt_EditPreparation.Text},
+                {"urunAdi", Txt_EditMenuName.Text},
+                {"urunGorseli","adsada" },
+                {"urunPrice",Txt_EditPrice.Text},
+                {"urunPuani",Txt_EditRaiting.Text }
             };
             DocumentSnapshot snap = await docref.GetSnapshotAsync();
             if (snap.Exists)
@@ -171,6 +176,11 @@ namespace HomeCookingWebPanel
             GridViewRow row = MenuGrid.Rows[rowIndex];
             if (e.CommandName == "Select")
             {
+                Txt_EditContent.Text = "";
+                foreach (ListItem item in Cbl_EditCategory.Items)
+                {
+                    item.Selected = false;
+                }
                 Data.Instance.MenuProcess = row.Cells[0].Text;
                 ShowEditPage();
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "", "showEdit();", true);
@@ -178,16 +188,25 @@ namespace HomeCookingWebPanel
         }
         async void ShowEditPage()
         {
-            //Document içine girmesini istersek;
             DocumentReference docref = database.Collection("recipes").Document(Data.Instance.MenuProcess);
             DocumentSnapshot snap = await docref.GetSnapshotAsync();
-            OrderModel order = snap.ConvertTo<OrderModel>();
-            Txt_EditOrderer.Text = order.userID;
-            Txt_EditOrderDate.Text = order.orderDate.AddHours(3).ToString();
-            Txt_EditOrderContent.Text = Data.Instance.CombinedOrder;
-            Txt_EditAddress.Text = order.userAdress;
-            Txt_EditOrderPrice.Text = order.orderPrice;
-            Dd_EditOrderStatu.SelectedValue = order.orderStatus;
+            FoodsModel food = snap.ConvertTo<FoodsModel>();
+            Txt_EditMenuName.Text = food.urunAdi;
+            Txt_EditPreparation.Text = food.hazirlamaSuresi;
+            Txt_EditPrice.Text = food.urunPrice;
+            Txt_EditRaiting.Text = food.urunPuani;
+            Image1.ImageUrl = food.urunGorseli;
+            foreach (var veri in food.malzemeler)
+            {
+                Txt_EditContent.Text += veri + Environment.NewLine;
+            }
+            foreach (ListItem checkboxItem in Cbl_EditCategory.Items)
+            {
+                if (food.urunTipi.Contains(checkboxItem.Value))
+                {
+                    checkboxItem.Selected = true;
+                }
+            }
         }
 
         protected void MenuGridGrid_RowCreated(object sender, GridViewRowEventArgs e)
