@@ -24,22 +24,22 @@ namespace HomeCookingWebPanel
         protected global::System.Web.UI.WebControls.Panel Panel1;
 
         /// <summary>
-        /// email denetimi.
+        /// Txt_Email denetimi.
         /// </summary>
         /// <remarks>
         /// Otomatik üretilmiş alan.
         /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox email;
+        protected global::System.Web.UI.WebControls.TextBox Txt_Email;
 
         /// <summary>
-        /// password denetimi.
+        /// Txt_Password denetimi.
         /// </summary>
         /// <remarks>
         /// Otomatik üretilmiş alan.
         /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox password;
+        protected global::System.Web.UI.WebControls.TextBox Txt_Password;
 
         /// <summary>
         /// BtnLogin denetimi.

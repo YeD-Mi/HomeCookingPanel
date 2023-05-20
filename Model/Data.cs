@@ -12,6 +12,11 @@ namespace HomeCookingWebPanel.Model
         public static Data Instance { get { return Data.instance; } }
         static Data() { instance = new Data(); }
 
+        //LoginPage
+
+        public string UserInfoID;
+        public string UserInfo { get { return UserInfoID; } set { UserInfoID = value; } }
+
         //OrderPage
 
         public string OrderProcessID, CombinedOrderID;

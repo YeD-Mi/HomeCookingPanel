@@ -150,7 +150,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label form-label">Change Image:</label>
                                                 <div class="col-sm-9">
-                                                  <asp:FileUpload ID="fileUpload1" runat="server" />
+                                                  <asp:FileUpload ID="fileUploadEdit" runat="server" />
                                                 </div>
                                             </div>
                                              <div class="form-group">

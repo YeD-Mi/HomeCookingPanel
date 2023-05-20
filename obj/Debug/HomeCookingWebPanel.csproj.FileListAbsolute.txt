@@ -257,3 +257,7 @@ C:\Users\182805015\Documents\GitHub\HomeCookingPanel\bin\Google.Apis.Storage.v1.
 C:\Users\182805015\Documents\GitHub\HomeCookingPanel\bin\Google.Apis.Storage.v1.xml
 C:\Users\182805015\Documents\GitHub\HomeCookingPanel\bin\Google.Cloud.Storage.V1.pdb
 C:\Users\182805015\Documents\GitHub\HomeCookingPanel\bin\Google.Cloud.Storage.V1.xml
+C:\Users\182805015\Documents\GitHub\HomeCookingPanel\bin\Firebase.Auth.dll
+C:\Users\182805015\Documents\GitHub\HomeCookingPanel\bin\FirebaseAdmin.dll
+C:\Users\182805015\Documents\GitHub\HomeCookingPanel\bin\FirebaseAdmin.xml
+C:\Users\182805015\Documents\GitHub\HomeCookingPanel\bin\firebase-config.json

@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-     <link rel="shortcut icon" href="img/icons.png" type="image/x-icon">
+     <link rel="shortcut icon" href="#" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,16 +27,16 @@
             </div>
             <div class="form-area">
                 <div class="group">
-                    <asp:TextBox CssClass="form-control" placeholder="E-Mail" ID="email" runat="server">
+                    <asp:TextBox CssClass="form-control" placeholder="E-Mail" ID="Txt_Email" runat="server">
             </asp:TextBox>
                     <i class="fa fa-user"></i>
                 </div>
                 <div class="group">
-                    <asp:TextBox CssClass="form-control" type="password" placeholder="Password" ID="password" runat="server">
+                    <asp:TextBox CssClass="form-control" type="password" placeholder="Password" ID="Txt_Password" runat="server">
             </asp:TextBox>
                     <i class="fa fa-key"></i>
                 </div>
-                <asp:Button BackColor="#cf2627" OnClick="BtnLogin_Click" CssClass="btn btn-default btn-block" ID="BtnLogin" runat="server" Text="Login"/>
+                <asp:Button BackColor="#cf2627" OnClick="LoginButton_Click" CssClass="btn btn-default btn-block" ID="BtnLogin" runat="server" Text="Login"/>
                 <asp:Label ID="Lbl_Login" runat="server" Visible="True"></asp:Label>
                 <asp:LinkButton CssClass="pull-right margin-t-5" ID="LinkButton1" ForeColor="#cf2627" runat="server">Forgot password</asp:LinkButton>
             </div>

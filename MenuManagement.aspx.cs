@@ -149,25 +149,60 @@ namespace HomeCookingWebPanel
 
         protected void Btn_Edit_Click(object sender, EventArgs e)
         {
-                EditIslem();
+            if (Txt_EditContent.Text == "" || Txt_EditMenuName.Text == "" || Txt_EditPreparation.Text=="" || Txt_EditPrice.Text =="" || Txt_EditRaiting.Text =="")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Please fill in the blanks!', icon: 'error', button: 'Tamam'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
+            }
+            else
+            {
+                string ImageURL = Image1.ImageUrl;
+                if (fileUploadEdit.HasFile)
+                {
+                    var fileName = System.IO.Path.GetExtension(fileUpload.FileName);
+                    if (IsImageFile(fileName))
+                    {
+                        fileName = fileUploadEdit.FileName;
+                        var contentType = fileUploadEdit.PostedFile.ContentType;
+                        var fileStream = fileUploadEdit.PostedFile.InputStream;
+                        ImageURL = AddMenuPic(fileName, contentType, fileStream);
+                    }
+                    else
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Yüklediğiniz dosya bir görsele benzemiyor. Lütfen kontrol ediniz!', icon: 'error', button: 'Tamam'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
+                    }
+                }
+                EditIslem(ImageURL);
+            }
         }
-        async void EditIslem()
+        async void EditIslem(string EditImageURL)
         {
+            string multilineText = Txt_EditContent.Text;
+            string[] lines = multilineText.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            ArrayList MenuContent = new ArrayList();
+            foreach (string line in lines)
+            { MenuContent.Add(line); }
+            ArrayList selectedItems = new ArrayList();
+            foreach (ListItem item in Cbl_EditCategory.Items)
+            {
+                if (item.Selected)
+                { selectedItems.Add(item.Value); }
+            }
             DocumentReference docref = database.Collection("recipes").Document(Data.Instance.MenuProcess);
             Dictionary<string, object> data = new Dictionary<string, object>()
             {
                 {"hazirlamaSuresi",Txt_EditPreparation.Text},
                 {"urunAdi", Txt_EditMenuName.Text},
-                {"urunGorseli","adsada" },
+                {"urunGorseli",EditImageURL },
                 {"urunPrice",Txt_EditPrice.Text},
                 {"urunPuani",Txt_EditRaiting.Text }
             };
             DocumentSnapshot snap = await docref.GetSnapshotAsync();
+            data.Add("malzemeler", MenuContent);
+            data.Add("urunTipi", selectedItems);
+            data.Add("urunAdiArray", TextSplit(Txt_EditMenuName.Text));
             if (snap.Exists)
-            {
-                await docref.UpdateAsync(data);
-            }
-            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Changes made to the order are saved.', icon: 'success', button: 'Tamam'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
+            { await docref.UpdateAsync(data); }
+            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Changes made to the menu are saved.', icon: 'success', button: 'Tamam'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
         }
 
         protected void MenuGrid_RowCommand(object sender, GridViewCommandEventArgs e)

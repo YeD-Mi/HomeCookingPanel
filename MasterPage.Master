@@ -4,7 +4,7 @@
 
 <html>
 <head runat="server">
-    <link rel="shortcut icon" href="img/icons.png" type="image/x-icon">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,7 +32,7 @@
                 <li" class="dropdown link">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle profilebox">
                         <b>Welcome:
-                            <asp:Label ID="kullanici" runat="server" Text=""></asp:Label>
+                            <asp:Label ID="UserInfo" runat="server" Text=""></asp:Label>
                         </b><span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-list dropdown-menu-right">
                         <li><a href="login.aspx"><i class="fa falist fa-power-off"></i>Exit</a></li>

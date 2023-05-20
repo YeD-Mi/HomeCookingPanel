@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HomeCookingWebPanel.Model;
+using System;
 
 namespace HomeCookingWebPanel
 {
@@ -6,7 +7,14 @@ namespace HomeCookingWebPanel
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            string email = Data.Instance.UserInfo;
+            int atIndex = email.IndexOf("@");
+            string username = "";
+            if (atIndex != -1)
+            {
+                username = email.Substring(0, atIndex);
+            }
+            UserInfo.Text = username;
         }
     }
 }

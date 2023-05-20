@@ -231,13 +231,13 @@ namespace HomeCookingWebPanel
         protected global::System.Web.UI.WebControls.Image Image1;
 
         /// <summary>
-        /// fileUpload1 denetimi.
+        /// fileUploadEdit denetimi.
         /// </summary>
         /// <remarks>
         /// Otomatik üretilmiş alan.
         /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fileUpload1;
+        protected global::System.Web.UI.WebControls.FileUpload fileUploadEdit;
 
         /// <summary>
         /// Txt_EditContent denetimi.
