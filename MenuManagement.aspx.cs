@@ -389,8 +389,7 @@ namespace HomeCookingWebPanel
             //Menü silinmesi için kullanılır.
             DocumentReference docref = database.Collection("recipes").Document(Data.Instance.MenuProcess);
             docref.DeleteAsync();
-            string script = "swal({title: 'The menu has been removed!', icon: 'success', button: 'OK'});";
-            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'The menu has been removed!', icon: 'success', button: 'OK'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
         }
     }
 }

@@ -142,10 +142,17 @@ namespace HomeCookingWebPanel
                                 myOrders.Add(food.urunAdi);
                             }
                         }
+                        DocumentReference docref1 = database.Collection("users").Document(order.userID);
+                        DocumentSnapshot snap2 = await docref1.GetSnapshotAsync();
+                        if (snap2.Exists)
+                        {
+                            UserModel user = snap2.ConvertTo<UserModel>();
+                            Data.Instance.OrdererBy = user.userName;
+                        }
                         Data.Instance.CombinedOrder = string.Join(", ", myOrders);
                         table.Rows.Add(
                         docsnap.Id,
-                        order.userID,
+                        Data.Instance.OrdererBy,
                         order.userAdress,
                         order.orderDate.AddHours(3).ToString(),
                         Data.Instance.CombinedOrder,
