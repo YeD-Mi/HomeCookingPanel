@@ -12,9 +12,9 @@
         <asp:ScriptManager ID="ScriptManager1" EnablePartialRendering="true" runat="server"></asp:ScriptManager>
         <div class="container-fluid padding-b-35" style="min-height:600px">
                      <div class="panel-body margin-5 text-right">
-                     <label class="control-label form-label">Durum:</label>
+                     <label class="control-label form-label">Status:</label>
                      <asp:DropDownList CssClass="btn btn-secondary dropdown-toggle" Font-Size="Smaller" ID="Ddl_FilterStatus" runat="server"></asp:DropDownList>
-                     <label class="control-label form-label">Tarih:</label>
+                     <label class="control-label form-label">Date:</label>
                     <asp:TextBox ID="Txt_FilterDate" Width="110px" Height="28px" Font-Size="Smaller" BackColor="#e3e5e4" AutoCompleteType="Disabled" ReadOnly="false" runat="server" TextMode="Date"></asp:TextBox>
                      <asp:LinkButton Font-Size="Smaller" OnClick="Btn_Reset_Click" Height="30px" BackColor="#cf2627" BorderColor="#353435" BorderWidth="1" runat="server" ID="Btn_Reset" CssClass="btn btn-success"><i class="fa fa-refresh"></i>Reset</asp:LinkButton>
                      <asp:LinkButton OnClick="BtnFilter_Click" Font-Size="Smaller" Height="30px" BackColor="#cf2627" BorderColor="#353435" BorderWidth="1" runat="server" ID="BtnFilter" CssClass="btn btn-success"><i class="fa fa-filter"></i>Filter</asp:LinkButton><br />

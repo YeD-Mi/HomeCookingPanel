@@ -12,18 +12,19 @@ namespace HomeCookingWebPanel
         FirestoreDb database;
         protected void Page_Load(object sender, EventArgs e)
         {
+            //OrderPage sayfası yüklendiğinde;
             string path = AppDomain.CurrentDomain.BaseDirectory + @"firestore.json";
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
             database = FirestoreDb.Create("project-management-22705");
             if (!IsPostBack)
             {
-                FillDropDown();
-                FetchOrders();
+                FillDropDown(); //Dropdown alanlarının doldurulması için kullanılır.
+                FetchOrders(); //Siparişlerin getirilmesi için kullanılır.
             }
         }
-
         void FillDropDown()
         {
+            //Dropdown alanları doldurulur.
             Ddl_FilterStatus.Items.Add("Preparing");
             Ddl_FilterStatus.Items.Add("On Delivery");
             Ddl_FilterStatus.Items.Add("Completed");
@@ -34,6 +35,7 @@ namespace HomeCookingWebPanel
 
         async void FetchOrders()
         {
+            //Firebase ile bağlantı kurup siparişleri çekiyoruz.
             DataTable table = new DataTable();
             table.Columns.Add("ID");
             table.Columns.Add("Orderer");
@@ -64,10 +66,17 @@ namespace HomeCookingWebPanel
                                 myOrders.Add(food.urunAdi);
                             }
                         }
+                        DocumentReference docref1 = database.Collection("users").Document(order.userID);
+                        DocumentSnapshot snap2 = await docref1.GetSnapshotAsync();
+                        if (snap2.Exists)
+                        {
+                            UserModel user = snap2.ConvertTo<UserModel>();
+                            Data.Instance.OrdererBy = user.userName;
+                        }
                         Data.Instance.CombinedOrder = string.Join(", ", myOrders);
                         table.Rows.Add(
                         docsnap.Id,
-                        order.userID,
+                        Data.Instance.OrdererBy,
                         order.userAdress,
                         order.orderDate.AddHours(3).ToString(),
                         Data.Instance.CombinedOrder,
@@ -86,11 +95,13 @@ namespace HomeCookingWebPanel
 
         protected void Btn_Reset_Click(object sender, EventArgs e)
         {
+            //Sayfa yenileme işlemi;
             Response.Redirect(Request.RawUrl);
         }
 
         protected void BtnFilter_Click(object sender, EventArgs e)
         {
+            //Filtre yapmak için;
             if (Txt_FilterDate.Text == "")
                 ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'You have not entered a date!', icon: 'error', button: 'OK'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
             else
@@ -99,6 +110,7 @@ namespace HomeCookingWebPanel
 
         async void FetchOrdersFilter()
         {
+            //Gelen veriler ile filtrele işlemi yapılır.
             DataTable table = new DataTable();
             table.Columns.Add("ID");
             table.Columns.Add("Orderer");
@@ -152,10 +164,12 @@ namespace HomeCookingWebPanel
 
         protected void Btn_Edit_Click(object sender, EventArgs e)
         {
-                EditIslem();
+            //Edit buton işlemi;
+            EditIslem();
         }
         async void EditIslem()
         {
+            //Yapılan edit işlemlerinin firebase'e kayıt edilmesi.
             DocumentReference docref = database.Collection("orders").Document(Data.Instance.OrderProcess);
             Dictionary<string, object> data = new Dictionary<string, object>()
             {
@@ -176,17 +190,19 @@ namespace HomeCookingWebPanel
             if (e.CommandName == "Select")
             {
                 Data.Instance.OrderProcess = row.Cells[0].Text;
+                Data.Instance.CombinedOrder = row.Cells[4].Text;
+                Data.Instance.OrdererBy = row.Cells[1].Text;
                 ShowEditPage();
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "", "showEdit();", true);
             }
         }
         async void ShowEditPage()
         {
-            //Document içine girmesini istersek;
+            //İlgili siparişlerin edit sayfasında görüntülenmesi;
             DocumentReference docref = database.Collection("orders").Document(Data.Instance.OrderProcess);
             DocumentSnapshot snap = await docref.GetSnapshotAsync();
             OrderModel order = snap.ConvertTo<OrderModel>();
-            Txt_EditOrderer.Text = order.userID;
+            Txt_EditOrderer.Text = Data.Instance.OrdererBy;
             Txt_EditOrderDate.Text = order.orderDate.AddHours(3).ToString();
             Txt_EditOrderContent.Text = Data.Instance.CombinedOrder;
             Txt_EditAddress.Text = order.userAdress;

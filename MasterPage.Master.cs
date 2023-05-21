@@ -7,6 +7,7 @@ namespace HomeCookingWebPanel
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Giriş yapan kullanıcının email adresinde @ simgesine kadar olan kısım alınır.
             string email = Data.Instance.UserInfo;
             int atIndex = email.IndexOf("@");
             string username = "";

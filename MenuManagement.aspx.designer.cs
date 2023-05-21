@@ -258,6 +258,15 @@ namespace HomeCookingWebPanel
         protected global::System.Web.UI.WebControls.CheckBoxList Cbl_EditCategory;
 
         /// <summary>
+        /// Btn_Delete denetimi.
+        /// </summary>
+        /// <remarks>
+        /// Otomatik üretilmiş alan.
+        /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Btn_Delete;
+
+        /// <summary>
         /// Btn_Edit denetimi.
         /// </summary>
         /// <remarks>

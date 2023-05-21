@@ -45,7 +45,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" style="background-color:#feab97" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                        <h3 style="text-align:center; color:#9642de">Add <span style="color:#feab97">New</span> Menu</h3>
+                                        <h3 style="text-align:center; color:#cf2627">Add <span style="color:#353435">New</span> Menu</h3>
                                         </div>
                                      <form method="post" action="MenuManagement.aspx">
                                         <div class="modal-body form-horizontal">
@@ -94,7 +94,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                            <asp:Button ID="BtnAdd" OnClick="BtnAdd_Click" BackColor="#9642de" CssClass="btn btn-default" runat="server" Text="Add"/>
+                                            <asp:Button ID="BtnAdd" OnClick="BtnAdd_Click" BackColor="#cf2627" CssClass="btn btn-default" runat="server" Text="Add"/>
                                         </div>
                                     </form>
                                 </div>
@@ -168,7 +168,8 @@
                                             </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                            <asp:Button ID="Btn_Edit" OnClick="Btn_Edit_Click" BackColor="#cf2627" CssClass="btn btn-default" runat="server" Text="Save"/>
+                                            <asp:Button ID="Btn_Delete" OnClick="Btn_Delete_Click" BackColor="#cf2627" CssClass="btn btn-default" runat="server" Text="Delete"/>
+                                            <asp:Button ID="Btn_Edit" OnClick="Btn_Edit_Click" BackColor="#353435" CssClass="btn btn-default" runat="server" Text="Save"/>
                                         </div>
                                     </form>
                                 </div>

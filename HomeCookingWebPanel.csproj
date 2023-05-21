@@ -405,6 +405,7 @@
     </Compile>
     <Compile Include="Model\Data.cs" />
     <Compile Include="Model\FoodCategoryModel.cs" />
+    <Compile Include="Model\UserModel.cs" />
     <Compile Include="Model\OrderModel.cs" />
     <Compile Include="Model\FoodsModel.cs" />
     <Compile Include="MenuManagement.aspx.cs">

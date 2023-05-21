@@ -1,7 +1,7 @@
 ﻿using Firebase.Auth;
 using HomeCookingWebPanel.Model;
 using System;
-using System.Threading.Tasks;
+using System.Web.UI;
 
 namespace HomeCookingWebPanel
 {
@@ -22,7 +22,7 @@ namespace HomeCookingWebPanel
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig(API_KEY));
                 var auth = await authProvider.SignInWithEmailAndPasswordAsync(email, password);
 
-                // Kullanıcı girişi başarılı ise
+                // Kullanıcı girişi başarılı ise;
                 if (auth != null && !string.IsNullOrEmpty(auth.FirebaseToken))
                 {
                     Data.Instance.UserInfo = auth.User.Email;
@@ -30,16 +30,16 @@ namespace HomeCookingWebPanel
                 }
                 else
                 {
-                    // Kullanıcı girişi başarısız ise, hata mesajı gösterebilirsiniz
-                    // Örneğin:
-                    // lblErrorMessage.Text = "Kullanıcı girişi başarısız.";
+                    //Kullanıcı girişi başarısız ise;
+                    string script = "swal({title: 'Login failed. Please check your email and password!', icon: 'error', button: 'OK'});";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
                 }
             }
             catch (FirebaseAuthException ex)
             {
-                // Kullanıcı girişi sırasında bir hata oluştu ise, hata mesajını gösterebilirsiniz
-                // Örneğin:
-                // lblErrorMessage.Text = "Bir hata oluştu: " + ex.Reason.ToString();
+                //Herhangi bir sebeple bağlantı kurulamadı ise;
+                string script = "swal({title: '" + "Error: " + ex.HResult.ToString() + "', icon: 'error', button: 'OK'});";
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
             }
         }
     }

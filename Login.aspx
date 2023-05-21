@@ -14,10 +14,12 @@
     <meta name="keywords" content="login,page,personel,bilgi,sistemi" />
     <title>Home Cooking Login Panel</title>
     <link href="css/root.css" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body style="background: linear-gradient(to right, #353435, #cf2627, #353435);">
     <div class="login-form">
         <form runat="server" method="post">
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <asp:Panel ID="Panel1" runat="server"></asp:Panel>
             <div class="top">
              <img src="img/homecooking-logo.png" alt="icon" height="180">
@@ -44,3 +46,4 @@
     </div>
 </body>
 </html>
+       

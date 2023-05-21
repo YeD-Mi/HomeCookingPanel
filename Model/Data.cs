@@ -19,7 +19,9 @@ namespace HomeCookingWebPanel.Model
 
         //OrderPage
 
-        public string OrderProcessID, CombinedOrderID;
+        public string OrderProcessID, CombinedOrderID,OrdererByID;
+
+        public string OrdererBy { get { return OrdererByID; } set { OrdererByID = value; } }
         public string OrderProcess { get { return OrderProcessID; } set { OrderProcessID = value; } }
         public string CombinedOrder { get { return CombinedOrderID; } set { CombinedOrderID = value; } }
 

@@ -18,6 +18,7 @@ namespace HomeCookingWebPanel
         readonly Islem islem = new Islem();
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Menu Yonetim sayfası yüklendiğinde;
             string path = AppDomain.CurrentDomain.BaseDirectory + @"firestore.json";
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
             database = FirestoreDb.Create("project-management-22705");
@@ -30,6 +31,7 @@ namespace HomeCookingWebPanel
 
         async Task FillDropDownAsync()
         {
+            //Dropdown alanlarının doldurulması için;
             Query Qref = database.Collection("categories");
             QuerySnapshot snap = await Qref.GetSnapshotAsync();
             foreach (DocumentSnapshot docsnap in snap)
@@ -49,6 +51,7 @@ namespace HomeCookingWebPanel
 
         async void FetchMenus()
         {
+            //Menülerin çekilerek tablo haline getirilmesi;
             DataTable table = new DataTable();
             table.Columns.Add("ID");
             table.Columns.Add("Name");
@@ -91,6 +94,7 @@ namespace HomeCookingWebPanel
 
         protected void Btn_Reset_Click(object sender, EventArgs e)
         {
+            //Sayfa yenilenmesi;
             Response.Redirect(Request.RawUrl);
         }
 
@@ -101,6 +105,7 @@ namespace HomeCookingWebPanel
 
         async void FetchMenusFilter()
         {
+            //Menüleri filtrelemek için kullanılır.
             DataTable table = new DataTable();
             table.Columns.Add("ID");
             table.Columns.Add("Name");
@@ -149,9 +154,10 @@ namespace HomeCookingWebPanel
 
         protected void Btn_Edit_Click(object sender, EventArgs e)
         {
+            //Menü üzerinde yapılan değişikliklerin sisteme kayıt edilmesi için kullanılır.
             if (Txt_EditContent.Text == "" || Txt_EditMenuName.Text == "" || Txt_EditPreparation.Text=="" || Txt_EditPrice.Text =="" || Txt_EditRaiting.Text =="")
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Please fill in the blanks!', icon: 'error', button: 'Tamam'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Please fill in the blanks!', icon: 'error', button: 'OK'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
             }
             else
             {
@@ -168,7 +174,7 @@ namespace HomeCookingWebPanel
                     }
                     else
                     {
-                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Yüklediğiniz dosya bir görsele benzemiyor. Lütfen kontrol ediniz!', icon: 'error', button: 'Tamam'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'The file you uploaded does not look like an image. Please upload pictures!', icon: 'error', button: 'OK'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
                     }
                 }
                 EditIslem(ImageURL);
@@ -202,7 +208,7 @@ namespace HomeCookingWebPanel
             data.Add("urunAdiArray", TextSplit(Txt_EditMenuName.Text));
             if (snap.Exists)
             { await docref.UpdateAsync(data); }
-            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Changes made to the menu are saved.', icon: 'success', button: 'Tamam'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Changes made to the menu are saved.', icon: 'success', button: 'OK'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
         }
 
         protected void MenuGrid_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -261,9 +267,10 @@ namespace HomeCookingWebPanel
 
         protected void BtnAdd_Click(object sender, EventArgs e)
         {
+            //Yeni menü eklemek için kullanılır.
             if (Txt_NewMenuName.Text == "" || Txt_NewMenuContent.Text == "" || Txt_NewMenuPrice.Text==""|| Txt_NewMenuRaiting.Text=="" || Txt_NewPerparationTime.Text==""||fileUpload.HasFile == false)
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Lütfen tüm alanları doldurunuz!', icon: 'error', button: 'Tamam'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Please fill in all fields!', icon: 'error', button: 'OK'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
             }
             else
             {
@@ -277,12 +284,12 @@ namespace HomeCookingWebPanel
                         var contentType = fileUpload.PostedFile.ContentType;
                         var fileStream = fileUpload.PostedFile.InputStream;
                         ImageURL = AddMenuPic(fileName, contentType, fileStream);
-                        HaberEkle(ImageURL);
-                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Yeni menu eklendi.', icon: 'success', button: 'Tamam'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
+                        MenuEkle(ImageURL);
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Adding new menu successful.', icon: 'success', button: 'OK'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
                     }
                     else
                     {
-                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'Yüklediğiniz dosya bir görsele benzemiyor. Lütfen kontrol ediniz!', icon: 'error', button: 'Tamam'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
+                        ScriptManager.RegisterStartupScript(this, GetType(), "showalert", "swal({title: 'The file you uploaded does not look like an image. Please upload pictures!', icon: 'error', button: 'OK'}).then(function() {window.location.href = '" + Request.RawUrl + "';});", true);
                     }
                 }
 
@@ -290,6 +297,7 @@ namespace HomeCookingWebPanel
         }
         private string AddMenuPic(string fileName, string contentType, Stream fileStream)
         {
+            //Resim eklemek için kullanılır.
             // StorageClient oluşturuluyor
             var storage = StorageClient.Create();
 
@@ -319,12 +327,13 @@ namespace HomeCookingWebPanel
         }
         private bool IsImageFile(string fileExtension)
         {
+            //Yüklenen resmin formatı için kontrol etmek;
             string[] allowedExtensions = { ".jpg", ".jpeg", ".png", ".gif" };
             return allowedExtensions.Contains(fileExtension.ToLower());
         }
-        void HaberEkle(string ImageURL)
+        void MenuEkle(string ImageURL)
         {
-            
+            //Yeni menü eklemek için kullanılır.
             string multilineText = Txt_NewMenuContent.Text;
             string[] lines = multilineText.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
             ArrayList MenuContent = new ArrayList();
@@ -373,6 +382,15 @@ namespace HomeCookingWebPanel
                 }
             }
             return kombinasyonlar;
+        }
+
+        protected void Btn_Delete_Click(object sender, EventArgs e)
+        {
+            //Menü silinmesi için kullanılır.
+            DocumentReference docref = database.Collection("recipes").Document(Data.Instance.MenuProcess);
+            docref.DeleteAsync();
+            string script = "swal({title: 'The menu has been removed!', icon: 'success', button: 'OK'});";
+            ScriptManager.RegisterStartupScript(this, GetType(), "showalert", script, true);
         }
     }
 }
